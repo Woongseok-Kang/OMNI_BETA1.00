@@ -1,0 +1,106 @@
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="5dp"
+    android:id="@+id/study_layout"
+    android:layout_marginRight="60dp"
+    android:layout_marginLeft="60dp"
+    android:background="@drawable/stt_round_list"
+    android:descendantFocusability="blocksDescendants">
+
+
+    <LinearLayout
+        android:padding="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/imbt_play"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/icon_edit_play"
+            android:background="#293942"/>
+
+        <TextView
+            android:layout_marginTop="3dp"
+            android:id="@+id/edit_stt_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:textSize="7sp"
+
+            android:textColor="#8a8f96"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_weight="1">
+
+        <EditText
+            android:id="@+id/edit_devide_stt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+            android:visibility="gone"
+            android:textSize="14sp"
+            android:textColor="#8795ff"
+            android:textColorHighlight="#ffffff"
+            android:textCursorDrawable="@drawable/edit_cursor"
+            android:textSelectHandle="@drawable/edit_highlight"
+            android:textSelectHandleLeft="@drawable/edit_highlight"
+            android:textSelectHandleRight="@drawable/edit_highlight"
+            android:backgroundTint="#00000000">
+
+        </EditText>
+
+        <TextView
+            android:id="@+id/text_devide_stt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView"
+
+            android:textSize="14sp"
+            android:textColor="#ffffff"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginRight="4dp">
+
+
+
+
+        <ImageButton
+            android:id="@+id/imbt_favor"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/icon_favor"
+            android:background="#293942"
+            android:layout_weight="1"/>
+
+        <ImageButton
+            android:id="@+id/imbt_done"
+
+            android:background = "#00000000"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/icon_edit_done"
+            android:visibility="gone"/>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:id="@+id/linearLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#293942"
+    android:gravity="center">
+
+    <!--<FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/splash_icon" />
+
+        <ImageView
+            android:id="@+id/o"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/o_icon"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="50dp"
+            />
+
+        <ImageView
+            android:id="@+id/m"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/m_icon"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="10dp"/>
+
+        <ImageView
+            android:id="@+id/n"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/n_icon"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="30dp"/>
+
+        <ImageView
+            android:id="@+id/i"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:srcCompat="@drawable/i_icon"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="60dp"/>
+
+
+    </FrameLayout>-->
+
+
+    <ImageView
+        android:id="@+id/new_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/icon_new_splash_logo" />
+</LinearLayout>

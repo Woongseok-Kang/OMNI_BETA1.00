@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#1b262c">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="21dp"
+        android:orientation="horizontal"
+        android:layout_marginTop = "38dp">
+
+
+        <TextView
+            android:id="@+id/text_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="#1b262c"
+            android:text="나의 학습 기록"
+            android:textColor="#f9f8ff"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="20dp"
+            >
+
+
+            <ImageButton
+                android:id="@+id/imbt_profile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/icon_share"
+                android:background="#00000000"/>
+
+            <!--<ImageView
+                android:id="@+id/imageView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:srcCompat="@drawable/icon_share" />-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_gravity="center_vertical"
+                >
+
+
+                <TextView
+                    android:id="@+id/mypage_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="슈슉님"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    />
+
+                <TextView
+                    android:id="@+id/mypage_check"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="오늘의 학습목표를 달성해보세요!"
+                    android:textColor="#ffffff"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="30dp"
+            >
+
+
+            <Button
+                android:id="@+id/bt_studyshare"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="오늘 학습량&#10;00분 00문장"
+                android:gravity="left|center_vertical"
+                android:paddingLeft = "30dp"
+                android:background="@drawable/round_layout"
+                android:textSize="20sp"
+                android:textColor="#ffffff"
+                android:paddingTop = "10dp"
+                android:paddingBottom= "10dp"
+
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/round_layout"
+            android:layout_gravity="bottom"
+            android:layout_marginBottom="30dp"
+            >
+
+           <LinearLayout
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:orientation="vertical"
+               >
+
+               <LinearLayout
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+                   android:layout_marginTop="10dp"
+               android:orientation="horizontal">
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="슈슉님의 "
+                   android:textColor="#ffffff"
+                   android:textSize="20sp"
+                   android:paddingLeft = "30dp"
+                   android:paddingTop = "10dp"
+                   android:id="@+id/txt_name2">
+
+
+               </TextView>
+
+               <TextView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:text="1월, 화이팅!"
+                   android:textColor="#ffffff"
+                   android:textSize="20sp"
+                   android:id="@+id/txt_month"
+                   >
+
+               </TextView>
+
+
+
+           </LinearLayout>
+
+               <LinearLayout
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:orientation="horizontal">
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="23일"
+                       android:textColor="#ffffff"
+                       android:textSize="20sp"
+                       android:paddingLeft = "30dp"
+                       android:id="@+id/txt_day"
+                       >
+
+
+                   </TextView>
+
+                   <TextView
+                       android:layout_width="wrap_content"
+                       android:layout_height="wrap_content"
+                       android:text="이나 학습하셨어요!"
+                       android:textColor="#ffffff"
+                       android:textSize="20sp"
+                       >
+
+                   </TextView>
+
+
+
+               </LinearLayout>
+
+
+
+
+
+
+
+           </LinearLayout>
+
+            <!--<TextView
+                android:id="@+id/text_study_result"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#ffffff"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="30dp"
+                android:textSize="20sp"
+                android:paddingTop="20dp"
+                android:text="슈슉님의 1월, 화이팅!&#10;23일이나 학습하셨어요" />-->
+
+
+
+          <!--  <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/cal_frame"
+               />-->
+
+            <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/calendarView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:mcv_selectionColor="#a9dbf0cb"
+                app:mcv_showOtherDates="defaults"
+                />
+
+
+
+        </LinearLayout>
+
+
+
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

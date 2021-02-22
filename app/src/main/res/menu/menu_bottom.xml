@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_home"
+        android:title="Home"
+        android:icon="@drawable/selelctor_button"
+        />
+
+
+    <item
+        android:id="@+id/navigation_file"
+        android:title="File"
+        android:icon="@drawable/selelctor_button2"
+        />
+
+    <item
+        android:id="@+id/navigation_report"
+        android:title="MyPage"
+        android:icon="@drawable/selelctor_button3"
+        />
+</menu>

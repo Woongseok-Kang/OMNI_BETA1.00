@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.RecordActivity"
+    android:orientation="vertical"
+    android:background="#1b262c">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="21dp"
+        android:orientation="horizontal"
+        android:layout_marginTop = "38dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="#1b262c"
+            android:text="파일목록"
+            android:textColor="#f9f8ff"
+            android:textSize="18dp" />
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop = "20dp">
+
+        <TextView
+            android:id="@+id/devide_file_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="#1b262c"
+            android:text="No Title"
+            android:textColor="#f9f8ff"
+            android:textSize="18dp" />
+
+        <ImageButton
+
+            android:id="@+id/re_devide_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="#00000000"
+            android:layout_marginRight="20dp"
+            app:srcCompat="@drawable/icon_re_devide_button"
+            />
+
+
+    </RelativeLayout>
+
+
+    <ScrollView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="10"
+        android:fillViewport="true"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        >
+
+
+            <com.baoyz.swipemenulistview.SwipeMenuListView
+                android:id="@+id/devide_stt_list"
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:dividerHeight="5dp"
+                android:divider="#00000000"
+                android:layout_height="match_parent">
+               <!-- android:listSelector="@drawable/stt_round_list2">-->
+            </com.baoyz.swipemenulistview.SwipeMenuListView>
+
+
+
+
+
+    </ScrollView>
+
+    <FrameLayout
+        android:id="@+id/frame_devide_voice"
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
+        android:background="@drawable/rectangle_new">
+
+    </FrameLayout>
+
+
+</LinearLayout>

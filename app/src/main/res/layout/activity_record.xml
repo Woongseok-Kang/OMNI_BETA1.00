@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.RecordActivity"
+    android:orientation="vertical"
+    android:background="#1b262c">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="21dp"
+        android:orientation="horizontal"
+        android:layout_marginTop = "38dp">
+
+        <TextView
+            android:id="@+id/text_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="#1b262c"
+            android:text="파일목록"
+            android:textColor="#f9f8ff"
+            android:textSize="18dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:layout_marginTop = "30dp">
+
+        <TextView
+            android:id="@+id/file_title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="#1b262c"
+            android:text="The greatest showman"
+            android:textColor="#f9f8ff"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llAudioBottom1"
+        android:layout_below="@+id/txtAudioEditTitle1"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="horizontal"
+            android:layout_marginTop = "20dp">
+            <org.techtown.omni_beta100.view.WaveformView
+                android:id="@+id/audioWaveform1"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorWaveformBg" />
+
+            <org.techtown.omni_beta100.view.MarkerView
+                android:id="@+id/markerStart1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="start marker"
+                android:nextFocusDown="@+id/markerEnd1"
+                android:src="@drawable/marker_left" />
+
+            <TextView
+                android:id="@+id/txtStartPosition1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00.00"
+                android:textColor="@color/colorTextGray"
+                android:textSize="12sp" />
+
+            <org.techtown.omni_beta100.view.MarkerView
+                android:id="@+id/markerEnd1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="end marker"
+                android:nextFocusDown="@+id/info"
+                android:nextFocusUp="@+id/markerStart1"
+                android:src="@drawable/marker_right" />
+
+            <TextView
+                android:id="@+id/txtEndPosition1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00.01"
+                android:textColor="@color/colorTextGray"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtAudioRecordTimeUpdate1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="00:01:00"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <!--   <TextView
+          android:id="@+id/sttResult"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="음성인식 결과가 여기에 표시됩니다."
+          android:textColor="#fff"
+          />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <FrameLayout
+            android:id="@+id/frame_voice"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="270dp"
+            android:background="@drawable/rectangle_new">
+        </FrameLayout>
+    </RelativeLayout>
+
+</LinearLayout>

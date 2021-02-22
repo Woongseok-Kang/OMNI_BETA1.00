@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.RecordActivity"
+    android:orientation="vertical"
+    android:background="#1b262c">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="21dp"
+        android:orientation="horizontal"
+        android:layout_marginTop = "38dp">
+
+        <Button
+            android:id="@+id/files_btn_alarm"
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/bell"
+            android:layout_gravity="left"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="20dp"
+            />
+
+        <TextView
+            android:id="@+id/text_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="#1b262c"
+            android:text="학습하기"
+            android:textColor="#f9f8ff"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="38dp"
+        android:orientation="horizontal"
+        android:layout_marginTop = "20dp">
+
+        <TextView
+            android:id="@+id/file_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:background="#1b262c"
+            android:text="The greatest showman"
+            android:textColor="#f9f8ff"
+            android:textSize="18dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/llAudioBottom"
+        android:layout_below="@+id/txtAudioEditTitle"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:orientation="horizontal"
+            android:layout_marginTop = "20dp">
+            <org.techtown.omni_beta100.view.WaveformView
+                android:id="@+id/audioWaveform"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:layout_marginBottom="25dp"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorWaveformBg" />
+
+            <org.techtown.omni_beta100.view.MarkerView
+                android:id="@+id/markerStart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="start marker"
+                android:nextFocusDown="@+id/markerEnd"
+                android:src="@drawable/marker_left" />
+
+            <TextView
+                android:id="@+id/txtStartPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00.00"
+                android:textColor="@color/colorTextGray"
+                android:textSize="12sp" />
+
+            <org.techtown.omni_beta100.view.MarkerView
+                android:id="@+id/markerEnd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription="end marker"
+                android:nextFocusDown="@+id/info"
+                android:nextFocusUp="@+id/markerStart"
+                android:src="@drawable/marker_right" />
+
+            <TextView
+                android:id="@+id/txtEndPosition"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="00.01"
+                android:textColor="@color/colorTextGray"
+                android:textSize="12sp" />
+
+        </RelativeLayout>
+
+        <TextView
+            android:id="@+id/txtAudioRecordTimeUpdate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="00:01:00"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_horizontal"
+            android:layout_marginTop = "20dp">
+
+
+
+            <TextView
+                android:id="@+id/txtAudioCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="40dp"
+
+                android:background="@drawable/icon_devide_back" />
+
+            <TextView
+                android:id="@+id/txtAudioDone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:background="@drawable/icon_devide_cut" />
+
+            <TextView
+                android:id="@+id/txtAudioPlay"
+                android:layout_marginLeft="40dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/icon_devide_play" />
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+
+    <ScrollView
+        android:layout_marginTop="15dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginRight="60dp"
+        android:layout_marginLeft="60dp"
+        android:fillViewport="true">
+        <com.baoyz.swipemenulistview.SwipeMenuListView
+            android:id="@+id/stt_list"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:dividerHeight="5dp"
+            android:divider="#00000000"
+            android:layout_height="match_parent"
+
+            >
+        </com.baoyz.swipemenulistview.SwipeMenuListView>
+    </ScrollView>
+
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/bt_stt_finish"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#293942"
+            android:textColor="#ffffff"
+            android:text="저장하기"
+            android:layout_marginTop="10dp" />
+    </LinearLayout>
+
+
+    </LinearLayout>
+
+
+
+
+
+
+</LinearLayout>
