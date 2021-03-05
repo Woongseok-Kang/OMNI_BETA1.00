@@ -54,20 +54,14 @@ import java.util.List;
 
 public class Devide_RecordActivity extends AppCompatActivity {
 
-    //private ContentResolver res;
+
     private int position;
     private ArrayList<MusicDto> list;
-    TextView textView;
-    //public InputStream stream;
-    //private Speech speech;
     public int sttMode;
-    //public static EditAdapter devide_editAdapter;
-    public static EditAdapter devide_editAdapter; //이거 바꾸기
+    public static EditAdapter devide_editAdapter;
 
     public static SwipeMenuListView devide_stt_list;
     ArrayList<Edit_item> devide_items;
-
-    //ArrayList<Uri> devide_uri_list;
 
     Intent intent;
 
@@ -77,18 +71,9 @@ public class Devide_RecordActivity extends AppCompatActivity {
 
     private TextView txt_title;
     private ImageButton bt_re_devide;
-
-    //public static FrameLayout f;
-
     private String music_title;
-
     private MusicDto orin_music;
 
-
-
-    //public static ArrayList<Edit_item> mItems_fav;
-
-    //ArrayList<Edit_item> devide_Items = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,14 +81,8 @@ public class Devide_RecordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_devide__record);
 
 
-
-        //f = (FrameLayout)findViewById(R.id.frame_devide_voice);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.frame_devide_voice, Devide_PlayFragment.newInstance()).commit();
-
-
-        //mItems_fav = new ArrayList<Edit_item>();
-
 
         devide_stt_list = findViewById(R.id.devide_stt_list);
 
@@ -112,17 +91,10 @@ public class Devide_RecordActivity extends AppCompatActivity {
 
         intent = getIntent();
 
-        sttMode = 0;///
-
-
-
-
-
-
+        sttMode = 0;
 
         if(intent.getSerializableExtra("devide_list")!=null){
             devide_items = (ArrayList<Edit_item>) intent.getSerializableExtra("devide_list");
-            //devide_uri_list = (ArrayList<Uri>) intent.getSerializableExtra("uri_list");
             music_title = intent.getStringExtra("audio_title");
             orin_music = (MusicDto)intent.getSerializableExtra("origin_music");
             devide_position = -1;
@@ -138,7 +110,6 @@ public class Devide_RecordActivity extends AppCompatActivity {
             Log.e("Devide_RecordActivity", "File_fragment에서 들어옴");
 
             ArrayList<ArrayList<Edit_item>> ary_script = (ArrayList<ArrayList<Edit_item>>) intent.getSerializableExtra("devide_com_script00");
-            //ArrayList<ArrayList<String>> ary_uri_str = (ArrayList<ArrayList<String>>) intent.getSerializableExtra("devide_com_uri00");
             devide_position = intent.getIntExtra("position00", -1);
             music_title = intent.getStringExtra("files_title");
 
@@ -148,17 +119,7 @@ public class Devide_RecordActivity extends AppCompatActivity {
             devide_editAdapter = new EditAdapter(1);
 
 
-            /*ArrayList<Uri> ary_uri = new ArrayList<>();
-
-            for(int i=0;i<ary_uri_str.get(devide_position).size();i++)
-            {
-                ary_uri.add(Uri.parse(ary_uri_str.get(devide_position).get(i)));
-            }*/
-
-
             devide_items = ary_script.get(devide_position);
-            //devide_uri_list = ary_uri;
-
 
         }
 
@@ -166,7 +127,6 @@ public class Devide_RecordActivity extends AppCompatActivity {
             Log.e("Devide_RecordActivity", "File_Fav에서 들어옴");
 
             ArrayList<Edit_item> ary_script = (ArrayList<Edit_item>) intent.getSerializableExtra("fav_script");
-            //ArrayList<ArrayList<String>> ary_uri_str = (ArrayList<ArrayList<String>>) intent.getSerializableExtra("devide_com_uri00");
             fav_positon = intent.getIntExtra("position_fav", -1);
 
             music_title = "즐겨찾기";
@@ -175,15 +135,6 @@ public class Devide_RecordActivity extends AppCompatActivity {
             devide_editAdapter = new EditAdapter(2);
 
             bt_re_devide.setVisibility(View.GONE);
-
-
-            /*ArrayList<Uri> ary_uri = new ArrayList<>();
-
-            for(int i=0;i<ary_uri_str.get(devide_position).size();i++)
-            {
-                ary_uri.add(Uri.parse(ary_uri_str.get(devide_position).get(i)));
-            }*/
-
 
             devide_items = ary_script;
             devide_stt_list.setSelection(fav_positon);
@@ -194,7 +145,6 @@ public class Devide_RecordActivity extends AppCompatActivity {
             Log.e("Devide_RecordActivity", "File_playlist에서 바로 들어옴");
 
             ArrayList<ArrayList<Edit_item>> ary_script = (ArrayList<ArrayList<Edit_item>>) intent.getSerializableExtra("devide_com_script_pl");
-            //ArrayList<ArrayList<String>> ary_uri_str = (ArrayList<ArrayList<String>>) intent.getSerializableExtra("devide_com_uri00");
             devide_position = intent.getIntExtra("position_pl", -1);
             music_title = intent.getStringExtra("playlist_title");
             orin_music = (MusicDto)intent.getSerializableExtra("orin_music");
@@ -204,28 +154,19 @@ public class Devide_RecordActivity extends AppCompatActivity {
 
             devide_editAdapter = new EditAdapter(1);
 
-
-            /*ArrayList<Uri> ary_uri = new ArrayList<>();
-
-            for(int i=0;i<ary_uri_str.get(devide_position).size();i++)
-            {
-                ary_uri.add(Uri.parse(ary_uri_str.get(devide_position).get(i)));
-            }*/
-
-
             devide_items = ary_script.get(devide_position);
-            //devide_uri_list = ary_uri;
+
         }
 
 
 
 
+        //Script 정렬
         Collections.sort(devide_items, new Edit_item.Sort1());
         Collections.sort(devide_items, new Edit_item.Sort2());
 
         System.out.println("아이템 사이즈" + devide_items.size());
         devide_editAdapter.setmItems(devide_items);
-        //devide_editAdapter.setmItems_uri(devide_uri_list);
         System.out.println("아이템 사이즈" + devide_editAdapter.getmItems().size());
 
 
@@ -323,15 +264,6 @@ public class Devide_RecordActivity extends AppCompatActivity {
                         Log.d("", "스크립트 편집");
 
 
-
-                        //f.setVisibility(View.GONE);
-
-
-                        /*if(intent.getSerializableExtra("fav_script")!=null){
-
-                        }*/
-
-
                         devide_editAdapter.getItem(position).setMode_edit(1);
                         devide_editAdapter.notifyDataSetChanged();
 
@@ -371,22 +303,9 @@ public class Devide_RecordActivity extends AppCompatActivity {
                                 }
                             }
 
-
-
-
-
-                            /*Files_Fragment_Fav.fav_editAdapter.removeItem(position);
-                            //Files_Fragment_Item.mItems_fav_list.remove(position);
-                            // Files_Fragment_Item.mItems_fav_uri.remove(position);
-                            //fav_editAdapter.setItemList(fav_editAdapter.getmItems(), fav_editAdapter.getmItems_uri());
-                            Files_Fragment_Fav.fav_editAdapter.setItemList(Files_Fragment_Fav.fav_editAdapter.getmItems());
-                            Files_Fragment_Fav.fav_editAdapter.notifyDataSetChanged();*/
                         }else{
 
 
-                           // System.out.println("요기들");
-                            //String path = Uri.parse(devide_editAdapter.getmItems().get(position).getItem_uri()).getPath();
-                            //System.out.println(path);
                             fileDelete(devide_editAdapter.getmItems().get(position).getOutpath());
                             new Handler().post(new Runnable() {
                                 @Override
@@ -414,12 +333,7 @@ public class Devide_RecordActivity extends AppCompatActivity {
                                     Devide_PlayFragment.now_uri = Uri.parse( Devide_PlayFragment.devide_item.get(0).getItem_uri());
 
 
-
                             }
-
-
-
-
                         }
 
                         devide_editAdapter.removeItem(position);
@@ -427,8 +341,6 @@ public class Devide_RecordActivity extends AppCompatActivity {
                         devide_editAdapter.notifyDataSetChanged();
 
                         break;
-
-
                 }
 
                 return false;
@@ -439,23 +351,7 @@ public class Devide_RecordActivity extends AppCompatActivity {
         devide_stt_list.setMenuCreator(creator);
 
         System.out.println("포지션 = " + position);
-        /*Uri musicURI = Uri.withAppendedPath(
-                MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, ""+ list.get(position).getId());
 
-        Cursor cursor = getContentResolver().query(musicURI, null, null, null, null );
-        cursor.moveToNext();
-        //String path = cursor.getString( cursor.getColumnIndex( "_data" ) );
-        //String URI = "gs://ssussuk_omni_bucket/"  + list.get(position).getTitle();
-        cursor.close();*/
-
-        //InternetThread internetThread = new InternetThread(URI,textView,stream, sttMode);
-        //internetThread.start();
-
-       /* try {
-            speech.sampleRecognize(path,textView, stream);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } */
     }
 
     @Override
@@ -502,15 +398,6 @@ public class Devide_RecordActivity extends AppCompatActivity {
             setResult(RESULT_OK, intent_re);
 
 
-
-
-        /*Intent intent2 = new Intent();
-        Bundle bundle2 = new Bundle();
-        bundle2.putSerializable("devide_com_uri", devide_uri_list);
-        intent2.putExtras(bundle2);
-
-        setResult(RESULT_OK, intent2);*/
-
             finish();
         }
         else{ // FAV에서 호출했을때
@@ -518,31 +405,14 @@ public class Devide_RecordActivity extends AppCompatActivity {
 
             Intent intent_re = new Intent();
             Bundle bundle = new Bundle();
-            //Bundle bundle2 = new Bundle();
             bundle.putSerializable("devide_com_script", devide_items);
-            //bundle2.putSerializable("devide_com_uri", devide_uri_list);
+
             intent_re.putExtras(bundle);
-            //intent_re.putExtras(bundle2);
-
-           // intent_re.putExtra("position_re", devide_position);
-
-
             setResult(RESULT_OK, intent_re);
-
             finish();
         }
     }
 
-
-
-
-
-        /*if(PlayFragment.mediaPlayer != null){
-            PlayFragment.mediaPlayer.stop();
-            PlayFragment.mediaPlayer.release();
-        }*/
-
-   // }
 
     public int getPosition(){
         return this.position;
@@ -561,13 +431,6 @@ public class Devide_RecordActivity extends AppCompatActivity {
         this.devide_items = devide_items;
     }
 
-   /* public ArrayList<Uri> getDevide_uri_list() {
-        return devide_uri_list;
-    }
-
-    public void setDevide_uri_list(ArrayList<Uri> devide_uri_list) {
-        this.devide_uri_list = devide_uri_list;
-    }*/
 
     public void replaceFragment(Fragment fragment) {
         FragmentManager frgm = getSupportFragmentManager();
@@ -659,12 +522,6 @@ public class Devide_RecordActivity extends AppCompatActivity {
                     if(Devide_PlayFragment.devide_item.size()!=0)
                    Devide_PlayFragment.now_uri = Uri.parse( Devide_PlayFragment.devide_item.get(0).getItem_uri());
 
-
-
-                    //Devide_RecordActivity.devide_stt_list.requestFocusFromTouch();
-
-                    //Devide_RecordActivity.devide_stt_list.setItemChecked(0, true);
-                    //Devide_RecordActivity.devide_editAdapter.notifyDataSetChanged();
                 }else {
 
                 }
@@ -712,9 +569,7 @@ public class Devide_RecordActivity extends AppCompatActivity {
     public void onStop() {
         super.onStop();
         System.out.println("favor onstop!!-----------------------------");
-        //System.out.println(fav_editAdapter.getmItems().size());
-        //SaveFavorData(fav_devide_items);
-        //Save_studyed_list(studyed_list);
+
     }
 
     @Override

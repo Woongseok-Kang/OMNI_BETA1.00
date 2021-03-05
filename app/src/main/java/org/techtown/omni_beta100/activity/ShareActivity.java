@@ -83,18 +83,13 @@ public class ShareActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 ActivityCompat.requestPermissions(ShareActivity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
-
-
                 cap.setBackgroundResource(R.drawable.share_background);
-                cap.buildDrawingCache();   // 캡처할 뷰를 지정하여 buildDrawingCache() 한다
-                Bitmap captureView = cap.getDrawingCache();   // 캡쳐할 뷰를 지정하여 getDrawingCache() 한다
+                cap.buildDrawingCache();   // 캡처할 뷰를 지정
+                Bitmap captureView = cap.getDrawingCache();   // 캡쳐할 뷰를 지정하여 bitmap으로 설정
 
+                FileOutputStream fos;   // 파일쓰기
 
-
-                FileOutputStream fos;   // FileOutputStream 이용 파일 쓰기 한다
-               // String strFolderPath = Environment.getExternalStorageDirectory().getAbsolutePath();
-
-                File strFolderPath = getExternalFilesDir(Environment.DIRECTORY_PICTURES + File.separator + "omni_capture");
+                File strFolderPath = getExternalFilesDir(Environment.DIRECTORY_PICTURES + File.separator + "omni_capture");//폴더 명 설정
                 File folder = new File(String.valueOf(strFolderPath));
                 if(!folder.exists()) {  // 해당 폴더 없으면 만들어라
                     folder.mkdirs();
@@ -106,16 +101,12 @@ public class ShareActivity extends AppCompatActivity {
                 Date dd = new Date(time);  //받은 시간을 Date 형식으로 바꾸기
                 String strTime = sdf.format(dd); //Data 정보를 포멧 변환하기
 
-
                // String strFilePath = strFolderPath + "/" + "studytime_" + strTime + ".png";
                 String strFilePath = strFolderPath + "/" + "studytime.png";
                 File fileCacheItem = new File(strFilePath);
-
-
-
                 try {
                     fos = new FileOutputStream(fileCacheItem);
-                    captureView.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                    captureView.compress(Bitmap.CompressFormat.PNG, 100, fos);//비트맵을 PNG파일로 변환
                 } catch (FileNotFoundException e) {
                     e.printStackTrace();
                 } finally {
@@ -165,7 +156,7 @@ public class ShareActivity extends AppCompatActivity {
             Toast.makeText(ShareActivity.this, "먼저 화면 우측 상단의 캡쳐버튼을 눌러 캡쳐하세요!", Toast.LENGTH_SHORT).show();
         } else {
             Toast.makeText(ShareActivity.this, "최신 학습량을 공유하려면 캡쳐버튼을 다시 누른뒤 공유하면 됩니다^^", Toast.LENGTH_SHORT).show();
-            Uri uri = FileProvider.getUriForFile(ShareActivity.this.getBaseContext(), "org.techtown.omni_beta10.fileprovider", media);
+            Uri uri = FileProvider.getUriForFile(ShareActivity.this.getBaseContext(), "org.techtown.omni_beta10.fileprovider", media);//캡쳐된 화면경로
             share.putExtra(Intent.EXTRA_STREAM, uri);
             startActivity(Intent.createChooser(share, "Share to"));
         }

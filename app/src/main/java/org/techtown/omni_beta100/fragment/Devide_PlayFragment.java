@@ -89,14 +89,7 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
 
     private int bar_first_control;// 아이템 누를 경우 00:00으로 초기화하기위한 변수
 
-    //private ContentResolver res;
-
-    //private int position;
-
-
     private int playbackPosition =0; //중지될때 위치
-    //private AudioManager audioManager;//볼륨조절 위해서
-
     private int playing_position=0;
 
 
@@ -112,7 +105,6 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.fragment_devide__play, container, false);
 
         bt_play = (ImageButton) view.findViewById(R.id.devide_bt_play);
@@ -124,9 +116,7 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
         bt_speed = (Button)view.findViewById(R.id.devide_bt_x2);
         bt_term = (Button)view.findViewById(R.id.devide_bt_term);
         bt_count = (Button)view.findViewById(R.id.devide_bt_count);
-        //Button bt_re_start = (Button) view.findViewById(R.id.bt_re_start);
 
-       // devide_uri_list = ((Devide_RecordActivity) getActivity()).getDevide_uri_list();
         devide_item = ((Devide_RecordActivity)getActivity()).getDevide_items();
 
 
@@ -134,25 +124,9 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
             if(devide_item.size()!=0)
             now_uri = Uri.parse(devide_item.get(0).getItem_uri());
 
-
-
-            //Devide_RecordActivity.devide_stt_list.requestFocusFromTouch();
-
-            //Devide_RecordActivity.devide_stt_list.setItemChecked(0, true);
-            //Devide_RecordActivity.devide_editAdapter.notifyDataSetChanged();
         }else {
 
         }
-
-        /*Devide_RecordActivity.devide_stt_list.setOnMenuItemClickListener(new SwipeMenuListView.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(int position, SwipeMenu menu, int index) {
-                now_uri = devide_uri_list.get(position);
-                Log.e("요기", "실행??");
-               // mediaPlayer = MediaPlayer.create(getActivity(), devide_uri_list.get(position));
-                return false;
-            }
-        });*/
 
         Devide_RecordActivity.devide_stt_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -177,7 +151,6 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
                     int m = a / 60000;
                     int s = (a % 60000) / 1000;
                     t2.setText((m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s));
-                    //t1.setText("00:00");
 
                 }
 
@@ -186,27 +159,15 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
                 {
                     if(i==position){
                         Devide_RecordActivity.devide_editAdapter.getItem(i).setStatus_studying(true);
-
-                        //System.out.println("이거이거 상태가???" + Devide_RecordActivity.devide_editAdapter.getItem(i).getStatus_studying());
                     }
                     else
                         Devide_RecordActivity.devide_editAdapter.getItem(i).setStatus_studying(false);
                 }
 
                 Devide_RecordActivity.devide_editAdapter.notifyDataSetChanged();
-                //view.setBackground(getResources().getDrawable(R.drawable.stt_round_list2));
-                Log.e("요기", "실행??");
 
             }
         });
-
-
-
-
-
-
-
-
 
         bt_speed.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -284,9 +245,6 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
             }
         });
 
-
-
-
         bt_play.setOnClickListener(new View.OnClickListener() {
 
 
@@ -294,7 +252,6 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View v) {
-
 
                 int count=0;
 
@@ -312,7 +269,6 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
                             mediaPlayer.start();
                             isPlaying = true;
                             new Devide_PlayFragment.MyThread().start();
-                            //Toast.makeText(getActivity(), "Restart", Toast.LENGTH_SHORT).show();
                             bt_play.setImageResource(R.drawable.icon_pause2);
                             i = 0;
                         } else {
@@ -323,24 +279,11 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
                                     mediaPlayer = null;
                                     bar_play.setProgress(0);
                                 }
-                                //playAudio();
-
 
                                 speed = getSpeed();
                                 term = getTerm();
                                 counter = getCounter();
-
-                                System.out.println(counter + "first");
-
-
-                                System.out.println("반복 횟수 : " + counter);
-                                System.out.println("반복 간격 : " + term);
-
-
-                                //Toast.makeText(getActivity(), "first play", Toast.LENGTH_LONG).show();
                                 repeat = 0;
-
-                                //playMusic(((RecordActivity) getActivity()).getList().get(((RecordActivity) getActivity()).getPosition()));
                                 playMusic();
 
                                 for(int i=0;i<MypageFragment.studyed_list.size();i++)
@@ -380,52 +323,16 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
                             playbackPosition = mediaPlayer.getCurrentPosition();
                             mediaPlayer.pause();
                             isPlaying = false;
-                            //Toast.makeText(getActivity(), "Pause", Toast.LENGTH_LONG).show();
                             bt_play.setImageResource(R.drawable.icon_centerplay);
                             i = 1;
 
-
-                            //stopPlay();
-                            //isPlaying = false;
-                            //Toast.makeText(getActivity(), "Stop!!!!", Toast.LENGTH_LONG).show();
-                            //bt_play.setImageResource(R.drawable.icon_centerplay);
-                            //i = 1;
-                            //bar_play.setProgress(0);
                         }
                     } else {
-                    /*if (mediaPlayer != null && !mediaPlayer.isPlaying()) {
 
-                        mediaPlayer.seekTo(playbackPosition);
-                        mediaPlayer.start();
-                        isPlaying = true;
-                        new MyThread().start();
-                        Toast.makeText(getActivity(), "Restart", Toast.LENGTH_LONG).show();
-                        bt_play.setImageResource(R.drawable.icon_pause2);
-                        i = 0;*/
                     }
 
                 }
             }
-
-                /*stopPlay();
-                Toast.makeText(getActivity(), "정지",
-                        Toast.LENGTH_LONG).show();*/
-            //     }
-            // });
-
-       /* bt_re_start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //mediaPlayer.stop(); // 음악이 재생될때만 멈추도록 설정해주기! 안그러면 오류뜨더라.
-                //mediaPlayer = null;
-
-                ((RecordActivity)getActivity()).replaceFragment(RecordFragment.newInstance());
-
-
-
-
-
-            }*/
 
         });
 
@@ -463,18 +370,12 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
 
                     t1.setText((m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s));
 
-                /*if(seekBar.getMax() == progress){
-                    stopPlay();
-                }*/
-
                 }
             }
 
             //드래그 시작할때
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
-
-
 
                 if(isPlaying == true){
                 try {
@@ -502,8 +403,6 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
 
 
             }
-
-
             //드래그 멈추고 손을 땔때
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
@@ -540,10 +439,6 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
                     }
                 }
 
-
-
-
-
             }
         });
 
@@ -560,27 +455,22 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
 
     public void playMusic() {
 
-        final Handler hand = new Handler();
+        final Handler hand = new Handler(); // 재생 반복 간격 딜레이를 위한 핸들러
+
         bar_first_control= 1;
         killMediaPlayer();
         try {
-            //bar_play.setProgress(0);
             if(mediaPlayer != null) {
                 mediaPlayer.reset();
             }
-            //Uri musicURI = Uri.withAppendedPath(
-                    //MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, ""+musicDto.getId());
-            mediaPlayer = MediaPlayer.create(getActivity(), now_uri);
-            // mediaPlayer.setDataSource(getActivity(), musicURI);
-            // mediaPlayer.prepare();
-            //mediaPlayer.setLooping(true);
 
+            mediaPlayer = MediaPlayer.create(getActivity(), now_uri);
             setPlayspeed(speed);
 
             mediaPlayer.start();
             status = RUN;
 
-            int a = mediaPlayer.getDuration();
+            int a = mediaPlayer.getDuration(); // 가져온 Script 음성 파일의 길이 측정
             bar_play.setMax(a);
             isPlaying = true;
 
@@ -595,7 +485,6 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
                 @Override
                 public void onCompletion(MediaPlayer mp) {
                     stopPlay();
-                    System.out.println("-----------------------------------반복 된 횟수 : " + repeat);
                     status = PAUSE;
                     try {
                         //mediaPlayer.release();
@@ -603,10 +492,8 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
                         e.printStackTrace();
                     }
 
-                    System.out.println("-----------------------------------이후 반복 된 횟수 : " + repeat);
-                    System.out.println("counter은 ??? : " + counter);
-
-                    if(val_counter == 1 && repeat<3){
+                    // 반복 횟수 설정한 대로 반복 재생생
+                   if(val_counter == 1 && repeat<3){
 
                         bt_speed.setEnabled(false);
                         bt_term.setEnabled(false);
@@ -798,17 +685,7 @@ public class Devide_PlayFragment extends Fragment implements onBackPressedListen
     }
 
     public void onBackPressed() {
-        /*stopPlay();
 
-        bt_speed.setText("x1.0");
-        val_speed =0;
-
-        bt_term.setText("0.5");
-        val_term =0;
-
-        bt_count.setText("1회");
-        val_counter =0;
-*/
         Log.d("Playfragment", "fragment에서 onbackpress호출");
     }
 

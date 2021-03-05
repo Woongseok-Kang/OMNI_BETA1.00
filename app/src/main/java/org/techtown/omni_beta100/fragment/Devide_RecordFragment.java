@@ -51,27 +51,16 @@ public class Devide_RecordFragment extends Fragment{
 
     ImageButton bt_stop;
 
-    //private String filePath, filename;
     int position = 0;
     public String filename;
 
     private MediaRecorder recorder;
 
-
-    //public static final int INIT = 0; //처음
-    //public static final int RUN = 1; // 실행중
-    //public static final int PAUSE = 2; // 정지
-
-    //public static int status = INIT;
     private long basetime, rec_time;
 
     TextView timer;
-    //SeekBar play_rec_bar;
     boolean isPlaying = false;
-
     MediaPlayer rec_mp;
-
-    //TextView seek_start, seek_end;
 
     class MyThread extends Thread {
         @Override
@@ -85,7 +74,7 @@ public class Devide_RecordFragment extends Fragment{
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         view = inflater.inflate(R.layout.fragment_devide__record, container, false);
 
 
@@ -93,11 +82,9 @@ public class Devide_RecordFragment extends Fragment{
 
         timer = (TextView) view.findViewById(R.id.devide_timer);
 
-        //File sdcard = Environment.getExternalStorageDirectory();
         File sdcard = getContext().getExternalFilesDir(Environment.DIRECTORY_MUSIC + File.separator
                 + "omni_record");
 
-        //String.valueOf(getExternalFilesDir(Environment.DIRECTORY_PICTURES + File.separator + "omni_record"))
         File file = new File(sdcard, "recorded.mp3");
         filename = file.getAbsolutePath();
         Log.d("getActivity()", "저장할 파일 명 : " + filename);
@@ -110,7 +97,6 @@ public class Devide_RecordFragment extends Fragment{
         bt_stop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //System.out.println("녹음 정지가 안되는거네??");
                 stopRecording();
 
                 new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme)
@@ -122,54 +108,7 @@ public class Devide_RecordFragment extends Fragment{
                                 final ListenDialog listenDialog = new ListenDialog(getActivity());
                                 listenDialog.show();
 
-
-
                                 startPlay();
-                                //play_rec_bar = ListenDialog.play_rec_bar;
-                                //seek_start = ListenDialog.seek_start;
-                                //seek_end = ListenDialog.seek_end;
-
-                               /* View innerView = getLayoutInflater().inflate(R.layout.alert_seekbar, null);
-                                AlertDialog.Builder adialog = new AlertDialog.Builder(getActivity(), R.style.MyDialogTheme);
-
-                                adialog.setView(innerView);
-                                play_rec_bar = (SeekBar) innerView.findViewById(R.id.play_seek);
-                                seek_start = (TextView) innerView.findViewById(R.id.seek_start);
-                                seek_end = (TextView) innerView.findViewById(R.id.seek_end);
-                                startPlay();
-
-
-                                adialog.setPositiveButton("닫기", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        ((RecordActivity) getActivity()).replaceFragment(PlayFragment.newInstance());
-
-                                    }
-                                });
-
-
-                                adialog.setNegativeButton("다시듣기", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-
-
-
-                                    }
-                                });
-                                AlertDialog alert = adialog.create();
-                                //alert.setTitle("재생");
-                                alert.show();
-
-                                alert.getButton(AlertDialog.BUTTON_NEGATIVE)
-                                        .setOnClickListener(new View.OnClickListener() {
-                                            @Override
-                                            public void onClick(View v) {
-                                                startPlay();
-                                            }
-                                        });*/
-
-
-
                                 ListenDialog.bt_close.setOnClickListener(new View.OnClickListener() {
                                     @Override
                                     public void onClick(View v) {
@@ -205,12 +144,13 @@ public class Devide_RecordFragment extends Fragment{
         return view;
     }
 
+    //녹음 시작
     private void recordAudio() {
         recorder = new MediaRecorder();
-        recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
-        recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
-        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT);
-        recorder.setOutputFile(filename);
+        recorder.setAudioSource(MediaRecorder.AudioSource.MIC); //오디오 소스 설정
+        recorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4); //출력 파일 포맷 설정
+        recorder.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT); //오디오 인코더 설정
+        recorder.setOutputFile(filename); // 출력 파일 이름 설정
 
         try {
             recorder.prepare();
@@ -230,7 +170,7 @@ public class Devide_RecordFragment extends Fragment{
             recorder.stop();
             recorder.release();
             recorder = null;
-            //Toast.makeText(getActivity(),"녹음중지", Toast.LENGTH_LONG).show();
+
         }
 
         ContentValues values = new ContentValues(10);
@@ -350,17 +290,6 @@ public class Devide_RecordFragment extends Fragment{
 
         return recTime;
     }
-  /* private String sendTimetoTotal(){
-        long nowTime = SystemClock.elapsedRealtime();
-        long overTime = nowTime - basetime;
-
-        long m = overTime/1000/60;
-        long s = (overTime/1000)%60;
-        long ms = overTime % 1000;
-        String recTime = String.format("%02분:%02초", m, s);
-
-        return recTime;
-    }*/
 
     Handler handler = new Handler() {
         @Override
@@ -379,7 +308,6 @@ public class Devide_RecordFragment extends Fragment{
                     Manifest.permission.RECORD_AUDIO}, 1);
         }
     }
-
 
     private void killMediaPlayer() {
         if (rec_mp != null) {

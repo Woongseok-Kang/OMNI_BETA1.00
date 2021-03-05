@@ -53,27 +53,12 @@ public class MypageFragment extends Fragment {
 
     MainActivity mainActivity;
     View view;
-   /* MediaPlayer mp;
-
-    View view;
-
-    TextView tv_total;
-    ImageButton bt_share;
-
-    Button bt_sel_kakao, bt_sel_insta;
-
-    LinearLayout cap;*/
-
-
     int month_change;
 
     public static Button bt_studyshare;
-    //private TextView tv_studyresult;
     private ImageButton imbt_profile;
     public static TextView txt_name;
     private MaterialCalendarView calendarView;
-    //public static int study_sentence_count;
-
     private  TextView txt_name2, txt_month, txt_day;
 
     public static ArrayList<String> studyed_list;
@@ -100,7 +85,6 @@ public class MypageFragment extends Fragment {
 
 
         bt_studyshare = (Button) view.findViewById(R.id.bt_studyshare);
-        //tv_studyresult = (TextView) view.findViewById(R.id.text_study_result);
         imbt_profile = (ImageButton) view.findViewById(R.id.imbt_profile);
         txt_name = (TextView) view.findViewById(R.id.mypage_name);
         txt_name2 = (TextView) view.findViewById(R.id.txt_name2);
@@ -121,6 +105,7 @@ public class MypageFragment extends Fragment {
 
 
 
+        //달력 초기 설정
         calendarView.state().edit()
                 .setFirstDayOfWeek(Calendar.SUNDAY)
                 .setMinimumDate(CalendarDay.from(2020, 12, 1))
@@ -129,33 +114,21 @@ public class MypageFragment extends Fragment {
                 .commit();
 
         attend_list = Read_attend();
-
-
         int month = CalendarDay.today().getMonth()+1;
         String str2 = Integer.toString(month) + "월, 화이팅!";
         txt_month.setText(str2);
 
         month_change = Read_month_change();
 
+        // 월이 바뀔 경우
         if(month_change!=month){
             month_change = month;
-            //attend_list.clear();
         }
-        System.out.println("이번달은" + month_change + "월");
-
-
-
+        // 오늘을 출석 리스트에 추가
         if(!attend_list.contains(CalendarDay.today())) {
             attend_list.add(CalendarDay.today());
-            //attend_list.add(CalendarDay.from(2021,1,5));
-            System.out.println("요기");
-            System.out.println(attend_list.size());
         }
         else{
-
-            System.out.println("이미 출첵");
-            System.out.println(attend_list.size());
-
         }
 
         int day_count = 0;
@@ -171,25 +144,13 @@ public class MypageFragment extends Fragment {
         String str = txt_name.getText().toString()+ "의 ";
         txt_name2.setText(str);
 
-
-
-
-
-
         CalendarDay c = CalendarDay.today();
-
-
-
-
-
+        // 달력 꾸미기 --> 출석된 날짜 나만의 디자인으로 표시
         calendarView.addDecorators(
-                new SundayDecorator(),
-                new SaturdayDecorator(),
-                new EventDecorator(attend_list, getActivity()),
-                        new OneDayDecorator(c, getActivity()));
-
-
-
+                new SundayDecorator(),// 일요일 빨간색으로
+                new SaturdayDecorator(), //토요일 파란색으로
+                new EventDecorator(attend_list, getActivity()),//출석일 표시
+                        new OneDayDecorator(c, getActivity()));//오늘 표시
 
 
 
@@ -236,22 +197,6 @@ public class MypageFragment extends Fragment {
                 });
             }
         });
-
-
-        /*FragmentTransaction frag_cal = getChildFragmentManager().beginTransaction();
-        Fragment cal_fragment = new fragment_cal();
-        if (!cal_fragment.isAdded()) {
-            frag_cal.replace(R.id.cal_frame, cal_fragment);
-            frag_cal.addToBackStack(null);
-            frag_cal.commit();
-        }*/
-
-
-        // handler.sendEmptyMessage(0);
-
-
-
-
 
 
         String bt_text = bt_studyshare.getText().toString();
@@ -380,58 +325,3 @@ public class MypageFragment extends Fragment {
     }
 }
 
-
-   /* private void buttonSetting(){
-        bt_sel_kakao.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                String type = "image/*";
-                String filename = "/capture123.png";
-                String mediaPath = Environment.getExternalStorageDirectory().getPath() +filename; //"/DCIM/Camera"
-
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType(type);
-                File media = new File(mediaPath);
-                Uri uri = FileProvider.getUriForFile(getActivity().getBaseContext(), "org.techtown.omni_beta10.fileprovider",media);
-                share.putExtra(Intent.EXTRA_STREAM,uri);
-                share.setPackage("com.kakao.talk");
-
-                startActivity(Intent.createChooser(share, "Share to"));
-
-            }
-        });
-
-        bt_sel_insta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String type = "image/*";
-                String filename = "/capture123.png";
-                String mediaPath = Environment.getExternalStorageDirectory().getPath() +filename; //"/DCIM/Camera"
-
-                Intent share = new Intent(Intent.ACTION_SEND);
-                share.setType(type);
-                File media = new File(mediaPath);
-                Uri uri = FileProvider.getUriForFile(getActivity().getBaseContext(), "org.techtown.omni_beta10.fileprovider",media);
-                share.putExtra(Intent.EXTRA_STREAM,uri);
-                share.setPackage("com.instagram.android");
-
-                startActivity(Intent.createChooser(share, "Share to"));
-            }
-        });
-    }
-
-
-
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        if(mp!=null)
-        {
-            mp.release();
-            mp=null;
-        }
-    }
-}*/

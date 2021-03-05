@@ -12,22 +12,16 @@ public class MusicDto implements Serializable {
     private String unique_key;
     private boolean devide_complete;
 
-
-
     public String getUnique_key() {
         return unique_key;
     }
-
     public void setUnique_key(String unique_key) {
         this.unique_key = unique_key;
     }
 
-
-
     public MusicDto() {
         this.isSelected = false;
     }
-
     public MusicDto(String id, String albumId, String title, String artist) {
         this.id = id;
         this.albumId = albumId;

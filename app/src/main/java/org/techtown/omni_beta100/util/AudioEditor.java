@@ -2,10 +2,8 @@ package org.techtown.omni_beta100.util;
 
 import android.app.ProgressDialog;
 import android.content.ContentValues;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -17,10 +15,8 @@ import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -46,26 +42,13 @@ import org.techtown.omni_beta100.view.MarkerView;
 import org.techtown.omni_beta100.view.WaveformView;
 
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.RandomAccessFile;
-import java.io.Serializable;
-import java.security.spec.ECField;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
-
-//import android.support.annotation.Nullable;
-//import android.support.v7.app.AppCompatActivity;
-//import com.demo.audiotrimmer.customAudioViews.MarkerView;
-//import com.demo.audiotrimmer.customAudioViews.SamplePlayer;
-//import com.demo.audiotrimmer.customAudioViews.SoundFile;
-//import com.demo.audiotrimmer.customAudioViews.WaveformView;
-//import com.kakao.util.helper.Utility;
 
 
 public class AudioEditor extends AppCompatActivity implements View.OnClickListener,
@@ -73,18 +56,13 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
         WaveformView.WaveformListener{ /* Audio trimmer*/
 
     private TextView txtAudioCancel;
-    private TextView txtAudioUpload;
     public static TextView txtStartPosition;
     public static TextView txtEndPosition;
-    private LinearLayout llAudioCapture;
-    private TextView txtAudioRecord;
-    private TextView txtAudioRecordTime;
-    private RelativeLayout rlAudioEdit;
     private MarkerView markerStart;
     private MarkerView markerEnd;
     private WaveformView audioWaveform;
     private TextView txtAudioRecordTimeUpdate;
-    private TextView txtAudioReset;
+   
     private TextView txtAudioDone;
     private TextView txtAudioPlay;
     private TextView txtAudioRecordUpdate;
@@ -141,13 +119,9 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
     public SoundFile soundfile;
     String path;
 
-    //public static ArrayList<Uri> devide_mp3_list;
-
     public TextView file_title;// 추가
 
 
-
-    //public static ListView sttlist;
 
     public static SwipeMenuListView sttlist;
     private int sttMode;
@@ -167,22 +141,16 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
 
 
         txtAudioCancel = (TextView) findViewById(R.id.txtAudioCancel);
-        //   txtAudioUpload = (TextView) findViewById(R.id.txtAudioUpload);
         txtStartPosition = (TextView) findViewById(R.id.txtStartPosition);
         txtEndPosition = (TextView) findViewById(R.id.txtEndPosition);
-        //   llAudioCapture = (LinearLayout) findViewById(R.id.llAudioCapture);
-        //   txtAudioRecord = (TextView) findViewById(R.id.txtAudioRecord);
-        //   txtAudioRecordTime = (TextView) findViewById(R.id.txtAudioRecordTime);
-        //   rlAudioEdit = (RelativeLayout) findViewById(R.id.rlAudioEdit);
         markerStart = (MarkerView) findViewById(R.id.markerStart);
         markerEnd = (MarkerView) findViewById(R.id.markerEnd);
         audioWaveform = (WaveformView) findViewById(R.id.audioWaveform);
         txtAudioRecordTimeUpdate = (TextView) findViewById(R.id.txtAudioRecordTimeUpdate);
-        // txtAudioReset = (TextView) findViewById(R.id.txtAudioReset);
+        
         txtAudioDone = (TextView) findViewById(R.id.txtAudioDone);
         txtAudioPlay = (TextView) findViewById(R.id.txtAudioPlay);
-        // txtAudioRecordUpdate = (TextView) findViewById(R.id.txtAudioRecordUpdate);
-        // txtAudioCrop = (TextView) findViewById(R.id.txtAudioCrop);
+       
         sttlist = findViewById(R.id.stt_list);
         bt_stt_finish = (Button)findViewById(R.id.bt_stt_finish);
         file_title = (TextView)findViewById(R.id.file_title);//추가
@@ -226,16 +194,9 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
         mTextBottomOffset = (int) (-40 * mDensity);
 
         txtAudioCancel.setOnClickListener(this);
-        //  txtAudioUpload.setOnClickListener(this);
-        //   txtAudioRecord.setOnClickListener(this);
+        
         txtAudioDone.setOnClickListener(this);
         txtAudioPlay.setOnClickListener(this);
-        //     txtAudioRecordUpdate.setOnClickListener(this);
-        //txtAudioCrop.setOnClickListener(this);
-        //    txtAudioReset.setOnClickListener(this);
-
-        //   mHandler.postDelayed(mTimerRunnable, 100);
-
         stream = getResources().openRawResource(R.raw.credential);
         sttMode = 1;
 
@@ -318,6 +279,7 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
             public void onClick(View v) {
 
 
+                //다시 분할 후 완료 눌렀을 때
                 if (intent.getSerializableExtra("orin_music") != null) {
 
                     Intent intent_re = new Intent();
@@ -334,9 +296,7 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
                     finish();
 
 
-
-
-
+                    // 첫 분할후 완료 눌렀을 때
                 } else {
                     if (editAdapter.getmItems().size() == 0) {
                         Toast.makeText(AudioEditor.this, "분할된 파일이 없습니다!", Toast.LENGTH_SHORT).show();
@@ -344,16 +304,12 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
                         list.get(position).setDevide_complete(true);
 
                         Intent intent2 = new Intent(AudioEditor.this, Devide_RecordActivity.class);
-                        //intent.putExtra("position",position);
                         intent2.putExtra("devide_list", editAdapter.getmItems());
                         intent2.putExtra("audio_title", list.get(position).getTitle());
                         intent2.putExtra("origin_music", list.get(position));
-                        //intent.putExtra("uri_list", editAdapter.getmItems_uri());
                         startActivityForResult(intent2, 200);
-
-
                     }
-                    //finish();
+
                 }
             }
         });
@@ -395,63 +351,6 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
             }
         });
 
-
-
-        /*try {
-            soundfile = SoundFile.create(path,listener);    // soundfile -> null 문제!
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (SoundFile.InvalidInputException e) {
-            e.printStackTrace();
-        }
-
-
-        if(ObjectUtilss.isEmpty(soundfile)){
-            Log.v("하이", "fffffff");
-        }else{
-            Log.v("방가", "fffffff");
-        }
-
-
-        if(ObjectUtilss.isEmpty(list.get(position).getTitle())){
-            Log.v("하이z", list.get(position).getTitle());
-        }else{
-            Log.v("방가z", list.get(position).getTitle());
-        }
-        if(ObjectUtilss.isEmpty(listener)){
-            Log.v("하이s", "fffffff");
-        }else{
-            Log.v("방가s", "fffffff");
-        }
-        Log.v("zzzzzzzzzzzzzz", "jjjjjjjjjjj");
-        mPlayer = new SamplePlayer(soundfile);*/
-        //audioWaveform.setIsDrawBorder(true);
-        //finishOpeningSoundFile(soundfile,0);
-
-        /*Thread mRecordAudioThread = new Thread() {
-            public void run() {
-                try {
-                    soundfile = SoundFile.create(path, listener);
-
-                } catch (final Exception e) {
-                    finish();
-                    e.printStackTrace();
-                    return;
-                }
-
-                Runnable runnable = new Runnable() {
-                    public void run() {
-                        audioWaveform.setIsDrawBorder(true);
-                        finishOpeningSoundFile(soundfile, 0);
-
-                    }
-                };
-
-                mHandler.post(runnable);
-            }
-        };
-
-        mRecordAudioThread.start();*/
 
         loadFromFile(path);
         mHandler.postDelayed(mTimerRunnable, 100);
@@ -579,11 +478,9 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
                 finishOpeningSoundFile(mRecordedSoundFile, 1);
             }*/ else if (view == txtAudioCrop) {
 
-//            txtAudioCrop.setBackgroundResource(R.drawable.ic_crop_btn);
-            txtAudioCrop.setVisibility(View.GONE);
+//       
+           
             txtAudioDone.setVisibility(View.VISIBLE);
-            txtAudioReset.setVisibility(View.VISIBLE);
-
             audioWaveform.setIsDrawBorder(true);
             audioWaveform.setBackgroundColor(getResources().getColor(R.color.colorWaveformBg));
             markerStart.setVisibility(View.VISIBLE);
@@ -591,20 +488,8 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
             txtStartPosition.setVisibility(View.VISIBLE);
             txtEndPosition.setVisibility(View.VISIBLE);
 
-        } /*else if (view == txtAudioUpload) {
-
-                if (txtAudioDone.getVisibility() == View.VISIBLE) {
-                    if (mIsPlaying) {
-                        handlePause();
-                    }
-                    saveRingtone(1);
-                }*/ else {
-            /*Bundle conData = new Bundle();
-            conData.putString("INTENT_AUDIO_FILE", mFile.getAbsolutePath());
-            Intent intent = new Intent();
-            intent.putExtras(conData);
-            setResult(RESULT_OK, intent);
-            finish();*/
+        }  else {
+            
         }
     }
     // }
@@ -612,8 +497,6 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
     /**
      * Start recording
      */
-    //private void startRecording()
-
     /**
      * After recording finish do necessary steps
      * @param mSoundFile sound file
@@ -648,10 +531,7 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
         if (audioWaveform != null && audioWaveform.isInitialized()) {
             double seconds = audioWaveform.pixelsToSeconds(mMaxPos);
             int i = Integer.parseInt(String.valueOf(Math.round(seconds)));
-
-            /*int min = (int) (seconds / 60);
-            float sec = (float) (seconds - 60 * min);*/
-
+            
             int hour = i/3600;
             int min = i%3600/60;
             int sec = i%3600%60;
@@ -661,9 +541,7 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
             }else{
                 txtAudioRecordTimeUpdate.setText(((hour<10?"0" + hour : hour ) + ":" + (min<10?"0" + min : min ) + ":" + (sec  <10 ? "0" + sec : sec)))  ;
             }
-
-            //txtAudioRecordTimeUpdate.setText(Double.toString(seconds));
-            //txtAudioRecordTimeUpdate.setText(String.format(Locale.US, "%02d:%05d", min, (int)sec));
+            
             Log.v("seconds", seconds +" ");
             Log.v("min", min +" ");
         }
@@ -799,11 +677,7 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(
                 RelativeLayout.LayoutParams.WRAP_CONTENT,
                 RelativeLayout.LayoutParams.WRAP_CONTENT);
-//        params.setMargins(
-//                startX,
-//                mMarkerTopOffset,
-//                -markerStart.getWidth(),
-//                -markerStart.getHeight());
+
         params.setMargins(
                 startX,
                 audioWaveform.getMeasuredHeight() / 2 + mMarkerTopOffset,
@@ -831,11 +705,7 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
                 audioWaveform.getMeasuredHeight() / 2 + mMarkerBottomOffset,
                 -markerEnd.getWidth(),
                 -markerEnd.getHeight());
-//        params.setMargins(
-//                endX,
-//                audioWaveform.getMeasuredHeight() - markerEnd.getHeight() - mMarkerBottomOffset,
-//                -markerEnd.getWidth(),
-//                -markerEnd.getHeight());
+
         markerEnd.setLayoutParams(params);
 
 
@@ -1636,18 +1506,7 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
             if (resultCode == RESULT_OK) {
                 System.out.println("첫번째 인자");
                 Bundle bundle = data.getExtras();
-               // Bundle bundle2 = data.getExtras();
-                //Toast.makeText(getActivity(), "분할완료", Toast.LENGTH_SHORT).show();
-
                 ArrayList<Edit_item> devide_com_script = (ArrayList<Edit_item>)bundle.getSerializable("devide_com_script");
-                //ArrayList<Uri> devide_com_uri = (ArrayList<Uri>)bundle2.getSerializable("devide_com_uri");
-
-                Log.e("AudioEditor", "Script" + Integer.toString(devide_com_script.size()));
-                //Log.e("AudioEditor", "Uri" + Integer.toString(devide_com_uri.size()));
-                //System.out.println(devide_com_uri.size());
-                //System.out.println(sel_list.get(0).isDevide_complete());
-                //System.out.println(sel_list.get(1).isDevide_complete());
-                //listView.setAdapter(sel_adapter);
 
                 for(int i=0;i<devide_com_script.size();i++)
                 {
@@ -1658,30 +1517,23 @@ public class AudioEditor extends AppCompatActivity implements View.OnClickListen
                 Intent intent3 = new Intent();
                 Bundle bundle_put = new Bundle();
                 Bundle bundle_put2 = new Bundle();
-                //Bundle bundle_put3 = new Bundle();
 
                 bundle_put.putSerializable("devide_com_list", list);
                 bundle_put2.putSerializable("devide_com_script", devide_com_script);
-                //bundle_put3.putSerializable("devide_com_uri", devide_com_uri);
 
                 intent3.putExtras(bundle_put);
                 intent3.putExtras(bundle_put2);
-                //intent2.putExtras(bundle_put3);
                 intent3.putExtra("position", position);
-
                 setResult(RESULT_OK, intent3);
-
 
 
             } else {   // RESULT_CANCEL
                 Toast.makeText(this, "편집을 완료하지 않으셨습니다.", Toast.LENGTH_SHORT).show();
             }
 
-//
         }
 
         finish();
-
     }
 
     @Override
